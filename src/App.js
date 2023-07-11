@@ -1,25 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { v4 as uuid } from "uuid";
 
-function App() {
+export default function App() {
+  // taskcontainer state
+  const [tasksArr, setTasksArr] = useState([]);
+
+  // task input state
+  const [task, setTask] = useState("");
+
+  function handleAddTask(task) {
+    setTasksArr((prevArr) => [...prevArr, { task, id: uuid() }]);
+    setTask("");
+  }
+
+  function handleDelete(id) {
+    setTasksArr(tasksArr.filter((task) => task.id !== id));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="header-input-container">
+        <Header />
+        <InputTask task={task} setTask={setTask} onAddTask={handleAddTask} />
+      </div>
+      <TasksContainer tasksArr={tasksArr} onDelete={handleDelete} />
     </div>
   );
 }
 
-export default App;
+function Header() {
+  return (
+    <h1 className="header">
+      Get Things <span>Done!</span>
+    </h1>
+  );
+}
+
+function InputTask({ task, setTask, onAddTask }) {
+  console.log(task);
+  return (
+    <div className="input-button-container">
+      <input
+        type="text"
+        placeholder="Enter Your Task..."
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+      ></input>
+      <button onClick={() => onAddTask(task)}>Add Task</button>
+    </div>
+  );
+}
+
+function TasksContainer({ tasksArr, onDelete }) {
+  return (
+    <div className="tasks-container">
+      {tasksArr.map((task) => (
+        <Task task={task} onDelete={onDelete} key={task.id} />
+      ))}
+    </div>
+  );
+}
+
+function Task({ task, onDelete }) {
+  return (
+    <div className="task">
+      <span>{task.task}</span>
+      <span className="delete-icon" onClick={() => onDelete(task.id)}>
+        X
+      </span>
+    </div>
+  );
+}
