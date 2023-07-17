@@ -12,10 +12,8 @@ export default function App() {
   const [task, setTask] = useState("");
 
   function handleAddTask(task) {
-    if (task) {
-      setTasksArr((prevArr) => [...prevArr, { task, id: uuid() }]);
-      setTask("");
-    }
+    setTasksArr((prevArr) => [...prevArr, { task, id: uuid() }]);
+    setTask("");
   }
 
   function handleDelete(id) {
