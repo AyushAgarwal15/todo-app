@@ -15,8 +15,8 @@ export default function App() {
     e.preventDefault();
     if (task) {
       setTasksArr((prevArr) => [...prevArr, { task, id: uuid() }]);
-      setTask("");
     }
+    setTask("");
   }
 
   function handleDelete(id) {
