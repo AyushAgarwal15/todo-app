@@ -7,7 +7,7 @@ export function InputTask({ task, setTask, onAddTask }) {
         value={task}
         onChange={(e) => setTask(e.target.value)}
       ></input>
-      <button onClick={() => onAddTask(task)}>Add Task</button>
+      <button onClick={(e) => onAddTask(e, task)}>Add Task</button>
     </div>
   );
 }
