@@ -1,5 +1,4 @@
 export function InputTask({ task, setTask, onAddTask }) {
-  console.log(task);
   return (
     <div className="input-button-container">
       <input
