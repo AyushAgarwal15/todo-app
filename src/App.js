@@ -39,15 +39,15 @@ function Header() {
 function InputTask({ task, setTask, onAddTask }) {
   console.log(task);
   return (
-    <div className="input-button-container">
+    <form className="input-button-container" onSubmit={() => onAddTask(task)}>
       <input
         type="text"
         placeholder="Enter Your Task..."
         value={task}
         onChange={(e) => setTask(e.target.value)}
       ></input>
-      <button onClick={() => onAddTask(task)}>Add Task</button>
-    </div>
+      <button>Add Task</button>
+    </form>
   );
 }
 
